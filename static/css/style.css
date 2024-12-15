@@ -1,6 +1,7 @@
 :root {
     --black: #000;
     --be-vietnam-pro: 'Be Vietnam Pro', sans-serif;
+    --gray: #737373;
     --white: #fff;
 }
 
@@ -20,13 +21,59 @@ button {
     background: none;
 }
 
-/* GLOBAL */
+input{
+    border: none;
+}
 
+input:focus{
+    outline: none;
+}
+
+/* HEADER */
+.header{
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    width: 100%;
+    height: 70px;
+    padding-inline: 64px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* GLOBAL */
 .main{
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+}
+
+.--three-cards-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding-inline: 46px;
+    padding-block: 25px;
+    gap: 24px;
+}
+
+.--searcher{
+    padding-inline: 18px;
+    padding-block: 6px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 6px;
+    color: var(--gray);
+    width: 430px;
+    max-width: 430px;
+}
+
+.--inline-container{
+    display: flex;
+    align-items: center;
+}
+
+.--block-container{
+    display: flex;
+    flex-direction: column;
 }
 
 .--mini-title {
@@ -45,6 +92,19 @@ button {
 .--card {
     border-radius: 6px;
     box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.--card-2{
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+    padding-block-end: 12px;
+    border-radius: 6px;
+}
+
+.product-img{
+    object-fit: cover;
 }
 
 .--inputs{
@@ -69,7 +129,9 @@ button {
     text-align: center;
 }
 
-.--button{
+.--button, .--button-2{
+    display: flex;
+    align-items: center;
     width: fit-content;
     height: 45px;
     border-radius: 6px;
@@ -79,12 +141,41 @@ button {
     color: var(--white);
 }
 
+.--button-2{
+    height: 32px;
+    padding-inline: 12px;
+}
+
+.--gap-6{
+    gap: 6px;
+}
+
 .--gap-16{
     gap: 16px;
 }
 
+.--gap-24{
+    gap: 24px;
+}
+
 .--bold{
     font-weight: 600;
+}
+
+.--between{
+    justify-content: space-between;
+}
+
+.--font-15{
+    font-size: 15px;
+}
+
+.--gray{
+    color: var(--gray);
+}
+
+.--padding-inline-16{
+    padding-inline: 16px;
 }
 
 .form {

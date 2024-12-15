@@ -1,11 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
+
 <body>
-    <h1>Hello, World!</h1>
+    <header class="header">
+        <div class="--inline-container --gap-6">
+            <span class="material-symbols-outlined">
+                storefront
+            </span>
+            <h3 class="--title">GO SHOPPING</h3>
+        </div>
+        <div class="--inline-container --gap-24">
+            <div class="--searcher --inline-container --gap-6">
+                <span class="material-symbols-outlined">
+                    search
+                </span>
+                <input class="--font-15" type="text" placeholder="Search...">
+            </div>
+            <span class="material-symbols-outlined --gray">
+                shopping_cart
+            </span>
+        </div>
+    </header>
+    <main class="--three-cards-container">
+        <div class="--card-2 --gap-6">
+            <img src="/static/images/placeholder.svg" alt="" class="product-img" width="380" height="200">
+            <div class="--block-container --padding-inline-16 --gap-6">
+                <h2 class="--mini-title">Mochila con contraseña</h2>
+                <p class="--desc">Mochila electrónica con contraseña, conector USB y división para laptops</p>
+                <div class="--inline-container --between">
+                    <p class="--price --bold">$59.99</p>
+                    <span class="--button-2">Agregar al carrito</span>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
+
 </html>
