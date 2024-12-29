@@ -1,16 +1,35 @@
 from flask import Flask, render_template
 from dotenv import load_dotenv
+import psycopg2
 import os
 
 # MICRO SERVICES
 import services.login as login
+import services.register as register
 
 load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
 
+# Connect to db
+db = psycopg2.connect(
+    host="localhost",
+    database="goshopping_postgres",
+    user="admin@localhost.com",
+    port="5433",
+    password=os.getenv("DB_PASSWORD")
+)
+cursor = db.cursor()
+
 # REGISTER BLUEPRINTS
 app.register_blueprint(login.login_bp)
+app.register_blueprint(register.register_bp)
+
+login.db = db
+register.db = db
+
+login.cursor = cursor
+register.cursor = cursor
 
 @app.route('/')
 def hello_world():

@@ -1,0 +1,27 @@
+# Docker Compose configuration version
+version: '1.0'
+
+services:
+  # PostgreSQL Database Service
+  postgres:
+    image: postgres:latest
+    container_name: goshopping_postgres
+    environment:
+      POSTGRES_USER: admin@localhost.com
+      # Using environment variable for password security
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: goshopping_postgres
+    volumes:
+      # Change the order of volumes - init.sql should be first
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db_data:/var/lib/postgresql/data
+    ports:
+      # Map host port 5433 to container port 5432
+      - "5433:5432"
+    restart: unless-stopped
+    # Add healthcheck to ensure database is ready
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin@localhost.com -d goshopping_postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5

@@ -2,3 +2,4 @@
 .env
 isolated
 *.pyc
+db_data
