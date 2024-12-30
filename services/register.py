@@ -2,11 +2,11 @@ from flask import Blueprint, request, make_response, session, abort
 from werkzeug.security import generate_password_hash
 
 register_bp = Blueprint("Register Service", __name__)
-db, cursor = None, None
+db = None
 
 @register_bp.route("/api/register", methods=["POST"])
 def register():
-    global db, cursor
+    global db
     data = request.form
     email = data.get("email")
     password = data.get("password")

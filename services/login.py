@@ -2,11 +2,11 @@ from flask import Blueprint, request, make_response, session, abort
 from werkzeug.security import check_password_hash
 
 login_bp = Blueprint("Login Service", __name__)
-db, cursor = None, None
+db = None
 
 @login_bp.route("/api/login", methods=["POST"])
 def login():
-    global db, cursor
+    global db
     data = request.form
     email = data.get("email")
     password = data.get("password")
