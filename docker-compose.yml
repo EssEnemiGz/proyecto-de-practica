@@ -25,3 +25,27 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+
+  # Flask Backend Service
+  flask:
+    build: 
+      context: ./
+      dockerfile: DockerFile
+    container_name: goshopping_server
+    environment:
+      FLASK_APP: 'app.py'
+      FLASK_ENV: 'development'
+      DB_HOST: 'postgres'
+      POSTGRES_DB: 'backend_db'
+      POSTGRES_USER: 'admin@localhost.com'
+      DB_PASSWORD: ${DB_PASSWORD}
+    ports:
+      # Map host port 5555 to container port 5000
+      - "5555:5000"
+    depends_on:
+      postgres:
+        condition: service_healthy  # Wait for postgres to be healthy
+    restart: unless-stopped
+    volumes:
+      # Mount application code for development
+      - ./:/app

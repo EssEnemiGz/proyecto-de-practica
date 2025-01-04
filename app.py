@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from dotenv import load_dotenv
-import libsql_experimental as libsql
+import psycopg2
 import os
 
 # MICRO SERVICES
@@ -12,10 +12,14 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
 
 # Connect to db
-url = "libsql://go-shopping-essenemigz.turso.io"
-auth_token = os.getenv("AUTH_TOKEN")
-db = libsql.connect("go-shopping.db", sync_url=url, auth_token=auth_token)
-db.sync()
+db = psycopg2.connect(
+    database="goshopping_postgres",
+    user='admin@localhost.com',
+    password=os.getenv("DB_PASSWORD"),
+    host='postgres',
+    port='5432'
+)
+cursor = db.cursor()
 
 # REGISTER BLUEPRINTS
 app.register_blueprint(login.login_bp)
@@ -23,6 +27,9 @@ app.register_blueprint(register.register_bp)
 
 login.db = db
 register.db = db
+
+login.cursor = cursor
+register.cursor = cursor
 
 @app.route('/')
 def hello_world():

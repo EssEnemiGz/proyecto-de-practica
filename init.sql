@@ -14,7 +14,7 @@ CREATE TABLE products (
 -- Crear tabla de usuarios
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
-  email VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
   password VARCHAR(255) NOT NULL
 );
 
@@ -26,9 +26,7 @@ CREATE TABLE carrito (
   cant int not null
 );
 
--- Insertar usuario administrador inicial solo si no existe
-INSERT INTO users (username, email, password)
-SELECT 'admin', 'admin@localhost.com', '1234'
-WHERE NOT EXISTS (
-    SELECT 1 FROM users WHERE email = 'admin@localhost.com'
-);
+-- Insertar usuario admin solo si no existe
+INSERT INTO users (email, password)
+VALUES ('admin@localhost.com', '12345')
+ON CONFLICT (email) DO NOTHING;

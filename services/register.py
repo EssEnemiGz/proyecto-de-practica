@@ -2,11 +2,11 @@ from flask import Blueprint, request, make_response, session, abort
 from werkzeug.security import generate_password_hash
 
 register_bp = Blueprint("Register Service", __name__)
-db = None
+db, cursor = None, None
 
 @register_bp.route("/api/register", methods=["POST"])
 def register():
-    global db
+    global db, cursor
     data = request.form
     email = data.get("email")
     password = data.get("password")
@@ -14,11 +14,13 @@ def register():
         abort(400)
     
     try:
+        print(db)
         password_hashed = generate_password_hash(password)
-        cursor.execute("INSERT INTO users(email, password) VALUES(%s, %s);", (email, password_hashed) )
+        cursor.execute("INSERT INTO users(id, email, password) VALUES(NULL, %s, %s);", (email, password_hashed) )
         db.commit()
         session['email'] = email
-    except:
+    except Exception as e:
+        print(e)
         print("FALLO LA CONSULTA SQL")
         abort(500)
     
